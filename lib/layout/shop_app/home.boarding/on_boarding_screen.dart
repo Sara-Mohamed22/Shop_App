@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/modules/login/shopLogin_screen.dart';
+import 'package:shop_app/layout/shop_app/login-home/shopLogin_screen.dart';
+import 'package:shop_app/network/local/cash_helper.dart';
 import 'package:shop_app/shared/styles/color.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -53,9 +54,20 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       appBar: AppBar(
         actions: [
            TextButton(onPressed: (){
-             Navigator.pushReplacement(context,
-               MaterialPageRoute(builder: (context) => ShopLoginScreen()),
-             );
+
+             CashHelper.saveData(key: 'onboard', value: true).then((value) {
+               if(value)
+                 {
+                   Navigator.pushReplacement(context,
+                     MaterialPageRoute(builder: (context) => ShopLoginScreen()),
+                   );
+
+                 }
+             });
+
+
+
+
            },
                child:
                Text('SKIP',
@@ -64,6 +76,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
+
         child: Column(
           children: [
             Expanded(
@@ -99,6 +112,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
             Row(
               children: [
+
                 SmoothPageIndicator(
                   controller: boardController ,
                   count: boarding.length ,
@@ -148,7 +162,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
 
-      Image.asset('${model.image}'),
+      Expanded(child: Image.asset('${model.image}')),
       // SizedBox(height: 30,),
       Text(
         '${model.title}' ,

@@ -8,9 +8,9 @@ import 'package:shop_app/shared/styles/color.dart';
 ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: HexColor('333739'),
     primarySwatch: defaultColor ,
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: defaultColor
-    ),
+    // floatingActionButtonTheme: FloatingActionButtonThemeData(
+    //     backgroundColor: defaultColor
+    // ),
     appBarTheme: AppBarTheme(
         titleSpacing: 20.0,
         iconTheme: IconThemeData(color: Colors.white  ),
@@ -23,7 +23,7 @@ ThemeData darkTheme = ThemeData(
         ),
         backgroundColor: HexColor('333739') ,
         elevation: 0.0 ,
-        titleTextStyle: TextStyle(
+        titleTextStyle: const TextStyle(
             color: Colors.white ,
             fontWeight: FontWeight.bold ,
             fontSize: 20.0
@@ -38,7 +38,7 @@ ThemeData darkTheme = ThemeData(
       backgroundColor: HexColor('333739'),
 
     ),
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
         bodyText1: TextStyle(
             fontWeight: FontWeight.w600 ,
             fontSize: 18.0 ,
@@ -52,10 +52,10 @@ ThemeData darkTheme = ThemeData(
 
 ThemeData lightTheme = ThemeData(
     primarySwatch: defaultColor ,
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: defaultColor
-    ),
-    appBarTheme: AppBarTheme(
+    // floatingActionButtonTheme: FloatingActionButtonThemeData(
+    //     backgroundColor: defaultColor
+    // ),
+    appBarTheme: const AppBarTheme(
         titleSpacing: 20.0,
         iconTheme: IconThemeData(color: Colors.black ),
         backwardsCompatibility: false,
@@ -75,7 +75,7 @@ ThemeData lightTheme = ThemeData(
 
     ) ,
     scaffoldBackgroundColor: Colors.white ,
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed ,
       selectedItemColor: defaultColor ,
       unselectedItemColor: Colors.grey ,
@@ -85,7 +85,7 @@ ThemeData lightTheme = ThemeData(
 
     ) ,
 
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
         bodyText1: TextStyle(
             fontWeight: FontWeight.w600 ,
             fontSize: 18.0 ,

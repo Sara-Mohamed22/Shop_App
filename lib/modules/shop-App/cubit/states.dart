@@ -54,3 +54,16 @@ class AppProfileErrorState extends AppStates {
   final dynamic error ;
   AppProfileErrorState(this.error);
 }
+
+
+
+
+
+class AppUpdateProfileLoadingState extends AppStates {}
+class AppUpdateProfileSuccessfulState extends AppStates {}
+
+class AppUpdateProfileErrorState extends AppStates {
+  final dynamic error ;
+  AppUpdateProfileErrorState(this.error);
+}
+

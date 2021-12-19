@@ -4,3 +4,6 @@ const HOME = 'home' ;
 const CATEGORIES = 'categories' ;
 const FAVORIATE = 'favorites' ;
 const PROFILE = 'profile' ;
+const REGISTER = 'register' ;
+const UPDATE = 'update-profile' ;
+const SEARCH = 'products/search' ;

@@ -29,6 +29,61 @@ class SettingsScreen extends StatelessWidget {
             builder: (context)=> Padding(
               padding: const EdgeInsets.all(15.0),
               child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: nameController,
+                      keyboardType: TextInputType.name,
+                      validator: (value)=> value!.isEmpty ? 'This field Required' : null ,
+                      decoration: InputDecoration(
+                          label: Text('Name'),
+                          prefixIcon: Icon(Icons.person),
+                          enabledBorder: OutlineInputBorder()
+                      ),
+
+                    ),
+                    SizedBox(height: 20,),
+                    TextFormField(
+                      controller: emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (value)=> value!.isEmpty ? 'This field Required' : null ,
+                      decoration: InputDecoration(
+                          label: Text('Email'),
+                          prefixIcon: Icon(Icons.mail),
+                          enabledBorder: OutlineInputBorder()
+                      ),
+
+
+
+                    ),
+                    SizedBox(height: 20,),
+                    TextFormField(
+                      controller: phoneController,
+                      keyboardType: TextInputType.phone,
+                      validator: (value)=> value!.isEmpty ? 'This field Required' : null ,
+                      decoration: InputDecoration(
+                          label: Text('Phone'),
+                          prefixIcon: Icon(Icons.call),
+                          enabledBorder: OutlineInputBorder()
+                      ),
+
+
+
+                    ),
+                    SizedBox(height: 20,),
+
+                    Container(
+                      width: double.infinity,
+                        height: 50,
+                        child: ElevatedButton(onPressed: (){
+                          CashHelper.removeData(key: 'token').then((value) {
+                            print('logout Successfully !');
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> ShopLoginScreen()));
+                          }).catchError((e){
+                            print('error in logout ${e.toString()}');
+                          });
+                        }, child: Text('LOGOUT')))
+                  ],
                 child: Form(
                   key: _formKey,
                   child: Column(

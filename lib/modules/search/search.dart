@@ -11,6 +11,11 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: Text('search',
+          style: Theme.of(context).textTheme.bodyText1 ,),
 
     var _formKey = GlobalKey<FormState>();
     TextEditingController searchController = TextEditingController();
@@ -27,7 +32,7 @@ class SearchScreen extends StatelessWidget {
         },
         builder: (context,state){
           SearchCubit c = SearchCubit.get(context);
-          
+
           return
             Scaffold(
                 appBar: AppBar(),

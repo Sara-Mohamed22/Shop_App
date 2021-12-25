@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shop_app/shop-home-layout.dart';
 import 'package:shop_app/models/shop-app/BaseException.dart';
+import 'package:shop_app/models/shop-app/cart-model.dart';
 import 'package:shop_app/models/shop-app/category-model.dart';
 import 'package:shop_app/models/shop-app/favorite_model.dart';
 import 'package:shop_app/models/shop-app/getFavorite_modal.dart';
@@ -27,6 +28,8 @@ class AppCubit extends Cubit<AppStates> {
   static AppCubit get(context) => BlocProvider.of(context);
 
   int currentIndex = 0;
+  int x =0 ;
+
 
   HomeModel? homemodel;
   CategoryModal? categorymodel ;
@@ -45,6 +48,8 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   Map<int , bool>favoriates ={} ;
+  Map<int , bool> carts ={};
+
 
   getHomeData() {
     emit(AppLoadingState());
@@ -65,6 +70,13 @@ class AppCubit extends Cubit<AppStates> {
 
           print(favoriates.toString());
 
+        homemodel!.data!.products!.forEach((element) {
+          carts.addAll({
+            element.id! : element.inCart!
+          });
+        });
+
+         print( 'carts : ${carts.toString()}');
         emit(AppSuccessfulState());
       }
       else {
@@ -234,5 +246,113 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
+
+  CartModel? cartmodel ;
+   changeAddButtonInCart( int id)
+  {
+    print('id :: $id');
+    carts[id] =true ;
+
+    DioHelper.postData(
+        url: CARTS,
+        data: {
+          "product_id" : id
+        },
+      token: token
+    )!.
+    then((value) {
+      if(value.statusCode == 200) {
+        cartmodel =CartModel.FromJson(value.data);
+        print('******************');
+        print('ssss:: ${cartmodel!.message}');
+        getCarts();
+         x=  allCart!.data!.cart_items!.length ;
+        print('x from getall $x');
+        emit(AddInCartSuccessful(cartmodel));
+
+      }
+    }).catchError((e){
+      print(e.toString());
+      emit(AddInCartError());
+    });
+
+  }
+
+
+ /* addxincart(int id )
+  {
+
+
+    x++ ;
+    emit(AddXInCartSuccessful(cartmodel));
+
+    DioHelper.postData(
+        url: CARTS,
+        data: {
+          "product_id" : id
+              },
+        token:  token
+         )!.
+    then((value) {
+      if(value.statusCode == 200) {
+        emit(AddXInCartSuccessful(cartmodel));
+      }
+    }).
+    catchError((e)
+    {
+      print(e.toString());
+      emit(RemoveXInCartError());
+    });
+
+
+
+  }
+  removexincart(int id)
+  {
+    if(x <= 1 )
+    {
+       carts[id] = false ;
+
+       emit(AppAddButtonCartSuccessfullState());
+       emit(RemoveXInCartSuccessful()) ;
+
+
+
+    }
+   else {
+      x--;
+
+      emit(RemoveXInCartSuccessful()) ;
+
+
+    }
+
+   emit(RemoveXInCartError());
+  }
+*/
+
+  CartModel? allCart;
+  getCarts()
+  {
+    emit(AppCartsLoadingState());
+    DioHelper.getData(
+        url: CARTS ,
+        token: token
+
+    )!.then((value) {
+      print('jooo :: ${value.data}' );
+      allCart = CartModel.FromJson(value.data);
+      print(allCart!.data!.cart_items![0].product!.name);
+      print('x==== ${allCart!.data!.cart_items!.length}');
+      x=allCart!.data!.cart_items!.length ;
+      emit(AppCartsSuccessfulState());
+
+    }).
+    catchError((e){
+      print(e.toString());
+      emit(AppCartsErrorState());
+
+    });
+  }
 
 }

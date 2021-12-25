@@ -1,3 +1,4 @@
+import 'package:shop_app/models/shop-app/cart-model.dart';
 import 'package:shop_app/models/shop-app/favorite_model.dart';
 
 abstract class AppStates {}
@@ -54,3 +55,28 @@ class AppProfileErrorState extends AppStates {
   final dynamic error ;
   AppProfileErrorState(this.error);
 }
+
+class AppUpdateProfileLoadingState extends AppStates {}
+class AppUpdateProfileSuccessfulState extends AppStates {}
+
+class AppUpdateProfileErrorState extends AppStates {
+  final dynamic error ;
+  AppUpdateProfileErrorState(this.error);
+}
+
+
+
+class AddInCartSuccessful extends AppStates {
+  final CartModel? cartmodal ;
+  AddInCartSuccessful(this.cartmodal);
+}
+
+class AddInCartError extends AppStates {}
+
+
+
+
+
+class AppCartsLoadingState extends AppStates {}
+class AppCartsSuccessfulState extends AppStates {}
+class AppCartsErrorState extends AppStates {}

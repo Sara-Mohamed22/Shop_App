@@ -11,11 +11,6 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Center(
-        child: Text('search',
-          style: Theme.of(context).textTheme.bodyText1 ,),
 
     var _formKey = GlobalKey<FormState>();
     TextEditingController searchController = TextEditingController();
@@ -36,6 +31,7 @@ class SearchScreen extends StatelessWidget {
           return
             Scaffold(
                 appBar: AppBar(),
+
                 body: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Form(
@@ -64,8 +60,10 @@ class SearchScreen extends StatelessWidget {
                         SizedBox(height: 30,),
                         if(state is SearchLoadingState )
                           LinearProgressIndicator(),
-                         if(state is SearchErrorState)
+                         if(state is SearchErrorState )
                           Center(child: Text('Not Found , Try Again')),
+
+                        c.searchmodal != null ?
                         Expanded(
                           child: ListView.separated(
                               itemBuilder: (context, index) =>  Container(
@@ -109,6 +107,7 @@ class SearchScreen extends StatelessWidget {
                               separatorBuilder: (context, index) => Divider(),
                               itemCount: c.searchmodal!.data!.data!.length),
                         )
+                            : Container(height: 100, )
                       ],
                     ),
                   ),

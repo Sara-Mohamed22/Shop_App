@@ -9,7 +9,7 @@ class FavoriateScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('koky ${AppCubit.get(context).getfav!.data!.data!.isEmpty}');
+    // print('koky ${AppCubit.get(context).getfav!.data!.data!.isEmpty}');
     return BlocConsumer<AppCubit ,AppStates >(
       listener:(BuildContext context,state){
 

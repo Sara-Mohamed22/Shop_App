@@ -26,6 +26,14 @@ class ProductScreen extends StatelessWidget {
                 showToast(message:'${state.fmodel!.message}' ,state: ToastState.ERROR );
               }
           }
+        if(state is AddInCartSuccessful)
+        {
+          // final snackBar =  SnackBar(content: Text('${state.cartmodal!.message}'));
+          // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          showToast(message:'${state.cartmodal!.message}' ,state: ToastState.SUCCESS );
+        }
+
+
       },
       builder: (context,state){
         return ConditionalBuilder(
@@ -109,7 +117,7 @@ class ProductScreen extends StatelessWidget {
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2 ,
                         mainAxisSpacing: 1 ,
                         crossAxisSpacing: 1,
-                        childAspectRatio: 1/2
+                        childAspectRatio: 1/2.2
                       ),
                         itemBuilder:(context,index)=> Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -165,10 +173,129 @@ class ProductScreen extends StatelessWidget {
                                         backgroundColor: c.favoriates[c.homemodel!.data!.products![index].id] == true ? Colors.red : Colors.grey,
                                         child: Icon(Icons.favorite_border , color: Colors.white,size: 18,))
 
-                                    )],
+                                    ),
+                                  ],
                               ),
 
+                               /*   c.carts[c.homemodel!.data!.products![index].id] == false ?        Container(
+                                    height: 39,
+                                    width: 80,
+                                    decoration: BoxDecoration(
+                                      border:Border.all(color: Colors.blue),
+                                      borderRadius: BorderRadius.only(
+                                          topLeft:Radius.circular(20) ,
+                                       topRight: Radius.circular(20),
+                                      bottomLeft: Radius.circular(20),
+                                      bottomRight: Radius.circular(20)),
 
+
+                                    ),
+
+                                    child: TextButton(
+                                        onPressed: (){
+                                          print('add');
+                                          print('indexProduct ${c.homemodel!.data!.products![index].id}');
+                                          c.changeAddButtonInCart(
+                                              c.homemodel!.data!.products![index].id! );
+
+
+                                        },
+                                        child:
+                                       Text('ADD' , style: TextStyle(fontSize: 15,
+                                            fontWeight: FontWeight.bold),)
+
+
+                                    ),
+                                  )
+
+                                 : Container(
+                                    width: 120,
+                                    height: 39,
+                                    decoration: BoxDecoration(
+                                      border:Border.all(color: Colors.blue),
+                                      borderRadius: BorderRadius.only(
+                                          topLeft:Radius.circular(20) ,
+                                          topRight: Radius.circular(20),
+                                          bottomLeft: Radius.circular(20),
+                                          bottomRight: Radius.circular(20))),
+                                    child: Row(
+                                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+
+                                        IconButton(onPressed: (){
+                                          print('remove');
+                                        //  c.removexincart(c.homemodel!.data!.products![index].id!);
+                                        }, icon: Icon(Icons.remove)),
+                                        Expanded(
+                                          child: Container(
+                                             width: 50,
+                                            height: 39,
+                                            color: Colors.blue,
+                                            child: Center(
+                                              child: Text('${c.x}' , style: TextStyle(
+                                                color: Colors.white,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold),),
+                                            ),
+                                          ),
+                                        ),
+                                        IconButton(onPressed: (){
+                                          print('add');
+                                      //    c.addxincart(c.homemodel!.data!.products![index].id!);
+                                          if(state is AddXInCartSuccessful)
+                                            {
+                                           final snackBar =  SnackBar(content: Text('${state.cartmodal!.message}'));
+                                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                            }
+                                          
+                                        }, icon: Icon(Icons.add)),
+                                      ],
+                                    ),
+                                  ) */
+
+
+                                /*  IconButton(onPressed: (){
+                                    print('hi');
+                                    print(c.homemodel!.data!.products![index].id );
+                                    c.changeFavoriates(c.homemodel!.data!.products![index].id!);
+
+
+                                  }, icon:  CircleAvatar(
+                                      radius: 15,
+                                      backgroundColor: c.carts[c.homemodel!.data!.products![index].id] == true ? Colors.red : Colors.grey,
+                                      child: Icon(Icons.add_shopping_cart , color: Colors.white,size: 18,))
+
+                                  ), */
+
+                                  Container(
+                                    height: 39,
+                                   // width: 120,
+                                    padding: EdgeInsets.symmetric(horizontal: 8),
+                                    decoration: BoxDecoration(
+                                      border:Border.all(color: Colors.blue),
+                                      borderRadius: BorderRadius.only(
+                                          topLeft:Radius.circular(20) ,
+                                          topRight: Radius.circular(20),
+                                          bottomLeft: Radius.circular(20),
+                                          bottomRight: Radius.circular(20)),),
+                                    child: TextButton(
+                                        onPressed: (){
+                                          print('add');
+                                          print('indexProduct ${c.homemodel!.data!.products![index].id}');
+                                          c.changeAddButtonInCart(
+                                              c.homemodel!.data!.products![index].id! );
+
+
+                                        },
+                                        child:
+                                        Text('ADD TO CART' , style: TextStyle(fontSize: 13,
+                                            fontWeight: FontWeight.bold),)
+
+
+
+
+                                    ),
+                                  ),
 
                               ],),
                             )

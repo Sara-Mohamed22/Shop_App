@@ -19,13 +19,16 @@ class SearchCubit extends Cubit<SearchState>
   getSearchData(String? text)
   {
     emit(SearchLoadingState());
+
     DioHelper.postData(
         url: SEARCH ,
         token: token,
         data:
         {'text' : text},
+      lang: 'en',
 
     )!.then((value) {
+
 
       searchmodal= CategoryModal.FromJson(value.data);
       print(searchmodal!.data!.data![0].id);

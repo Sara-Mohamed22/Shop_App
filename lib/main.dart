@@ -27,7 +27,8 @@ void main() async
   await CashHelper.init() ;
   HttpOverrides.global = MyHttpOverrides();
 
-  bool onboarding = CashHelper.getData(key: 'onboard') ;
+  dynamic onboarding = CashHelper.getData(key: 'onboard') ;
+
 
   Widget widget;
   if(onboarding == true )
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context)=> AppCubit()..getHomeData()..getCategoreyData()..getFavorateData()..getProfileData() )
+        BlocProvider(create: (context)=> AppCubit()..getHomeData()..getCategoreyData()..getFavorateData()..getProfileData()..getCarts() )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
